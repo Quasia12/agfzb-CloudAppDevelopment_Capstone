@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from . import views
 
-app_name = 'djangoapp'
+app_name = 'djangoapp' 
 urlpatterns = [
     # route is a string contains a URL pattern
     # view refers to the view function
@@ -14,8 +14,8 @@ urlpatterns = [
     path('registration/', views.registration_request, name='registration'),
     path('login/', views.login_request, name='login'),
     path('logout/', views.logout_request, name='logout'),
-    path('dealer/<int:id>/', views.get_dealer_details, name='dealer_details'),
-    path('dealer/<int:id>/review', views.add_review, name='add_review'),
+    path('dealer/<int:id>/review', views.get_dealer_details, name='get_dealer_details'),
+    path('add/<int:id>/review', views.add_review, name='add_review'),
     # path for registration
 
     # path for login

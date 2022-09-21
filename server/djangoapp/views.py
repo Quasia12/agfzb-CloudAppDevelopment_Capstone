@@ -24,7 +24,7 @@ def about(request):
 def contact(request):
     context = {}
     if request.menthod == 'GET':
-    return render(request, 'djangoapp/contact.html', context)
+        return render(request, 'djangoapp/contact.html', context)
 
 def get_dealerships(request):
     context = {}
@@ -51,12 +51,17 @@ def logout_request(request):
     return redirect('djangoapp:index')
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
-# def get_dealer_details(request, dealer_id):
-# ...
+def get_dealer_details(request, dealer_id):
+    context = {}
+    if request.method == "GET":
+        return render(request, 'djangoapp/index.html', context)
 
 # Create a `add_review` view to submit a review
-# def add_review(request, dealer_id):
-# ...
+def add_review(request, dealer_id):
+    context = {}
+    if request.method == "GET":
+        return render(request, 'djangoapp/index.html', context)
+
 def registration_request(request):
     context = {}
     if request.method == 'GET':
@@ -73,10 +78,9 @@ def registration_request(request):
         except:
             logger.debug("{}is new user".format(username))
         if not user_exist:
-            user = USer.objects.create_user(username==username, first_name=first_name, last_name=last_name,) 
-                                            password=password)
-                    login(request, user)
-                    return redirect("djanoapp:index")
+            user = USer.objects.create_user(username==username, first_name=first_name, last_name=last_name, password=password,)
+            login(request, user)
+            return redirect("djangoapp:index")
         else:
             return render(request, 'djangoapp/registration.html', context)
 
