@@ -14,6 +14,8 @@ urlpatterns = [
     path('registration/', views.registration_request, name='registration'),
     path('login/', views.login_request, name='login'),
     path('logout/', views.logout_request, name='logout'),
+    path('dealer/<int:id>/', views.get_dealer_details, name='dealer_details'),
+    path('dealer/<int:id>/review', views.add_review, name='add_review'),
     # path for registration
 
     # path for login
