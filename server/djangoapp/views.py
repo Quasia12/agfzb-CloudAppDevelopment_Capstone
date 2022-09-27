@@ -23,7 +23,7 @@ def about(request):
 
 def contact(request):
     context = {}
-    if request.menthod == 'GET':
+    if request.method == 'GET':
         return render(request, 'djangoapp/contact.html', context)
 
 def get_dealerships(request):
