@@ -1,11 +1,11 @@
   applications:
-  - name: djangoapp
+  - name: jahsha
     routes:
-      - route: $HOST.$DOMAIN
+      - route: jahsha.us-south.cf.appdomain.cloud
     memory: 128M
     buildpack: python_buildpack
-  - name: djangoapp-nginx
+  - name: jahsha-nginx
     routes:
-      - route: $HOST.$DOMAIN/static
+      - route: jahsha.us-south.cf.appdomain.cloud/static
     memory: 128M
     buildpack: staticfile_buildpack
