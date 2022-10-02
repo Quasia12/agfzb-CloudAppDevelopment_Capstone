@@ -16,35 +16,26 @@
     <body>
     <!-- Remove this line the first time you edit this file -->
     <!--Add a nav bar here -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <div class="navbar-brand">
-              <a class="navbar-brand" href="#">Dealership Review</a>
-              <a class="navbar-brand" href="{% url 'djangoapp:about' %}">About</a>
-              <a class="navbar-brand" href="{% url 'djangoapp:contact' &}">Contact</a>
+            <div class="navbar-header">
+                  <a class="navbar-brand" href="{% url 'djangoapp:about' %}">Dealership Review</a>
             </div>
-
-            {% if user.is_authenticated %}
-
-            <li>
-                <a class="btn btn-link" href="#">Hi {{ user.first_name}}!</a>
-                <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
-                <a class="navbar-brand" href="{% url 'djangoapp:about' %}">About</a>
-                <a class="navbar-brand" href="{% url 'djangoapp:contact' %}">Contact</a>
-            </li>
-
-            {% else %}
-
-
-            <li>
-                <form class="form-inline"action="{% url 'djangoapp:login' %}">method="post">
-                    {% csrf_token %}
-                    <div class="input-group">
-                        <a class="btn btn-light" href="{% url 'djangoapp:about' %}">About</a>
-                        <a class="btn btn-light" href="{% url 'djangoapp:contact' %}">Contact</a>
-                        <input type="text" class="form-control" placeholder="Username" name="username">
-                        <input type="password" class="form-control" placeholder="Password" name="psw">
-                        <button class="btn btn-light" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username" >
+                            <input type="password" class="form-control" placeholder="Username" name="psw" >
+                            <button class="btn btn-primary" type="submit">Login</button>
+                            <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
                         </div>
                     </form>
                 </li>

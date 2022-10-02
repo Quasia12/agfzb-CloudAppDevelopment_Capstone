@@ -32,18 +32,17 @@ def get_dealerships(request):
         return render(request, 'djangoapp/index.html', context)
 
 def login_request(request):
-    context ={}
-    if request.method == 'POST':
+    if request.method == "POST":
         username = request.POST['username']
         password = request.POST['psw']
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+            #messages.success(request, "Login successfully!")
             return redirect('djangoapp:index')
         else:
-            return render(request, 'djangoapp/login.html', context)
-    else:
-        return render(request, 'djangoapp/login.html', context)
+            messages.warning(request, "Invalid username or password.")
+            return redirect("djangoapp:index")
 
 def logout_request(request):
     print("Log out the user '{}'".format(request.user.username))
