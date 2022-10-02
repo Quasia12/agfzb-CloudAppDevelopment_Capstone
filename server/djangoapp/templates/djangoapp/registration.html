@@ -6,6 +6,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
     <body>
-    <!--Add a registration form here -->
+        {% if user.is_authenticated %}
+        <li>
+            <form class="form-inline" action="{% url 'djangoapp:registration' %}" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="username  " name="username" >
+                    <input type="firstname" class="form-control" placeholder="firstname" name="firstname" >
+                    <input type="lastname" class="form-control" placeholder="lastname" name="lastname" >
+                    <input type="password" class="form-control" placeholder="password" name="password >
+                    <button class="btn btn-primary" type="submission">Sign Up</button>
+                    <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                </div>
+            </form>
+        </li>
+       {% endif %} 
     </body>
 </html>
