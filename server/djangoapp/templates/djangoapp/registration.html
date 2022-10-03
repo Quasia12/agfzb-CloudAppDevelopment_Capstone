@@ -5,21 +5,31 @@
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-    <body>
-        {% if user.is_authenticated %}
-        <li>
-            <form class="form-inline" action="{% url 'djangoapp:registration' %}" method="post">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="username  " name="username" >
-                    <input type="firstname" class="form-control" placeholder="firstname" name="firstname" >
-                    <input type="lastname" class="form-control" placeholder="lastname" name="lastname" >
-                    <input type="password" class="form-control" placeholder="password" name="password >
-                    <button class="btn btn-primary" type="submission">Sign Up</button>
-                    <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
-                </div>
-            </form>
-        </li>
-       {% endif %} 
-    </body>
+<body>
+<form action="{% url 'djangoapp:registration' %}" method="post">
+  <div class="container">
+    {% csrf_token %}
+    <h1>Sign Up</h1>
+    <hr>
+      <div class="form-group">
+        <label for="username"><b>User Name</b></label>
+        <input type="text" class="form-control" placeholder="Enter User Name: " name="username" required>
+        <label for="firstname"><b>First Name</b></label>
+        <input type="text" class="form-control" placeholder="Enter First Name: " name="firstname" required>
+        <label for="lastname"><b>Last Name</b></label>
+        <input type="text" class="form-control" placeholder="Enter Last Name: " name="lastname" required>
+        <label for="psw"><b>Password</b></label>
+        <input type="password" class="form-control", placeholder="Enter Password: " name="psw" required>
+      </div>
+      <div>
+        <button class="btn btn-primary" type="submit">Sign up</button>
+      </div>
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-warning" role="alert">{{ message }}</div>
+          {% endfor %}
+      {% endif %}
+  </div>
+</form>
+</body>
 </html>
