@@ -1,16 +1,18 @@
 from django.db import models
 from django.utils.timezone import now
-from django.core import serializers 
+from django.core import serializers
 import uuid
 import json
+
 
 class CarMake(models.Model):
     name = models.CharField(null=False, max_length=20, default='undefined')
     # - Name
     description = models.TextField(null=True)
     # - Description
+
     def __str__(self):
-    # - __str__ method to print a car make object
+        # - __str__ method to print a car make object
         return self.name + ": " + self.description
 
 
@@ -19,7 +21,8 @@ class CarModel(models.Model):
     # - Many-To-One relationship to Car Make model (One Car Make has many Car Models, using ForeignKey field)
     name = models.CharField(null=False, max_length=40, default='undefined')
     # - Name
-    dealer_id = models.CharField(null=False, max_length=40, default='undefined')        
+    dealer_id = models.CharField(
+        null=False, max_length=40, default='undefined')
     # - Dealer id, used to refer a dealer created in cloudant database
     SEDAN = 'Sedan'
     SUV = 'SUV'
@@ -37,7 +40,7 @@ class CarModel(models.Model):
         (SPORTS, 'Sports'),
         (HATCHBACK, 'Hatchback'),
         (CONVERTIBLE, 'Convertible'),
-        (MINIVAN, 'Minivan'),   
+        (MINIVAN, 'Minivan'),
     ]
     type = models.CharField(
         null=False,
@@ -49,28 +52,27 @@ class CarModel(models.Model):
     year = models.DateField(null=False)
     # - Year (DateField)
     year = models.DateTimeField('date designed')
+
     def __str__(self):
         return self.type
     # - __str__ method to print a car make object
 
 
 class CarDealer:
-
-
-    def __init__(self, address, city, full_name, id, lat, long, st, zip):
+    def __init__(self, address, city, full_name, id, lat, long, st, zip, short_name):
         # Dealer address
         self.address = address
         # Dealer city
         self.city = city
         # Dealer full name
-        self.full_name=full_name
+        self.full_name = full_name
         # Dealer id
         self.id = id
         # Location lat
         self.lat = lat
         # Location long
         self.long = long
-
+        self.short_name = short_name
         # Dealer state
         self.st = st
         # Dealer zip
@@ -101,7 +103,8 @@ class DealerReview:
 
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__,
-                            sort_keys=True, indent=4)
+                          sort_keys=True, indent=4)
+
 
 class ReviewPost:
 
@@ -117,4 +120,4 @@ class ReviewPost:
 
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__,
-                            sort_keys=True, indent=4)
+                          sort_keys=True, indent=4)
