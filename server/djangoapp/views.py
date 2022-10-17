@@ -32,14 +32,12 @@ def get_dealer_by_id_from_cf(url, id):
     print('json_result from line 54', json_result)
     if json_result:
         dealers = json_result[0]
-        # print("line 70 restapis",json_result)
-        dealer_doc = dealers
-        print("0th address element line 73", dealers["address"])
-        dealer_obj = CarDealer(address=dealers["address"], city=dealers["city"],
-                               id=dealers["id"], lat=dealers["lat"], long=dealers["long"], full_name=dealers["full_name"],
-                               short_name=dealers["short_name"], st=dealers["st"], zip=dealers["zip"])
+    print("line 70 restapis",json_result)
+    dealer_doc = dealers
+    print("0th address element line 73", dealers["address"])
+    dealer_obj = CarDealer(address=dealers["address"], city=dealers["city"],id=dealers["id"], lat=dealers["lat"], long=dealers["long"], full_name=dealers["full_name"],short_name=dealers["short_name"], st=dealers["st"], zip=dealers["zip"])
     return dealer_obj
-
+ 
 
 def login_request(request):
     if request.method == "POST":
@@ -48,7 +46,7 @@ def login_request(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            #messages.success(request, "Login successfully!")
+            messages.success(request, "Login successfully!")
             return redirect('djangoapp:index')
         else:
             messages.warning(request, "Invalid username or password.")
@@ -84,21 +82,6 @@ def add_review(request, dealer_id):
     context = {}
     if request.method == "GET":
         return render(request, 'djangoapp/index.html', context)
-
-
-def get_dealer_details(request, id):
-    if request.method == "GET":
-        context = {}
-        dealer_url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/sbarksdale.bridgespointeinc.nc%40gmail.com_djangoserver-SCB/actions/dealership-package/get-dealership"
-        dealer = get_dealer_by_id_from_cf(dealer_url, id=id)
-        context["dealer"] = dealer
-
-        review_url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/sbarksdale.bridgespointeinc.nc%40gmail.com_djangoserver-SCB/actions/dealership-package/get-review"
-        reviews = get_dealer_reviews_from_cf(review_url, id=id)
-        print(reviews)
-        context["reviews"] = reviews
-
-        return render(request, 'djangoapp/dealer_details.html', context)
 
 
 def registration_request(request):
