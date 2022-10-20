@@ -25,20 +25,7 @@ def contact(request):
     context = {}
     if request.method == 'GET':
         return render(request, 'djangoapp/contact.html', context)
-
-
-def get_dealer_by_id_from_cf(url, id):
-    json_result = get_request(url, id=id)
-    print('json_result from line 54', json_result)
-    if json_result:
-        dealers = json_result[0]
-    print("line 70 restapis",json_result)
-    dealer_doc = dealers
-    print("0th address element line 73", dealers["address"])
-    dealer_obj = CarDealer(address=dealers["address"], city=dealers["city"],id=dealers["id"], lat=dealers["lat"], long=dealers["long"], full_name=dealers["full_name"],short_name=dealers["short_name"], st=dealers["st"], zip=dealers["zip"])
-    return dealer_obj
  
-
 def login_request(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -59,6 +46,16 @@ def logout_request(request):
     return redirect('djangoapp:index')
 
 # Create a `get_dealer_details` view to render the reviews of a dealer
+
+
+def get_dealer_details(request, dealer_id):
+    if request.method == "GET":
+        context = {}
+    review_url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/sbarksdale.bridgespointeinc.nc%40gmail.com_djangoserver-SCB/actions/dealership-package/get-review.json"
+    reviews = get_dealer_reviews_from_cf(review_url, dealerId=dealer_id)
+    print(reviews)
+    context['reviews'] = reviews
+    return HttpResponse(reviews)
 
 def get_dealerships(request):
     if request.method == "GET":
