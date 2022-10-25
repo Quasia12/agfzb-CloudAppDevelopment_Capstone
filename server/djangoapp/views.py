@@ -51,7 +51,7 @@ def logout_request(request):
 def get_dealer_details(request, dealer_id):
     if request.method == "GET":
         context = {}
-    review_url = "https://us-south.functions.cloud.ibm.com/api/v1/namespaces/sbarksdale.bridgespointeinc.nc%40gmail.com_djangoserver-SCB/actions/dealership-package/get-review.json"
+    review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/sbarksdale.bridgespointeinc.nc%40gmail.com_djangoserver-SCB/dealership-package/get-dealership"
     reviews = get_dealer_reviews_from_cf(review_url, dealerId=dealer_id)
     print(reviews)
     context['reviews'] = reviews
@@ -59,7 +59,7 @@ def get_dealer_details(request, dealer_id):
 
 def get_dealerships(request):
     if request.method == "GET":
-        url = "https://jahsha.us-south.cf.appdomain.cloud/dealer-get"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/sbarksdale.bridgespointeinc.nc%40gmail.com_djangoserver-SCB/dealership-package/get-dealership"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
