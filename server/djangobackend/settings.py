@@ -27,7 +27,7 @@ DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["localhost","https://quasia1288-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/","localhost","jahsha.us-south.cf.appdomain.cloud",]
+ALLOWED_HOSTS = ["localhost","https://quasia1288-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/","localhost","djangoserver-1288.us-south.cf.appdomain.cloud",]
 
 
 # Application definition
