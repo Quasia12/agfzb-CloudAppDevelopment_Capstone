@@ -52,7 +52,7 @@ def logout_request(request):
 def get_dealer_details(request, dealer_id):
     context = {}
     if request.method == "GET":
-        review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/sbarksdale.bridgespointeinc.nc@gmail.com_djangoserver-SCB/dealership-package/get-review"
+        review_url = "https://us-south.functions.appdomain.cloud/api/v1/web/f3e16eb9-b4fa-4e9e-8897-ee1d90c7eacc/dealership-package/get-review"
     reviews = get_dealer_reviews_from_cf(url, dealer_id)
     context = {
         "reviews": reviews,
@@ -64,7 +64,7 @@ def get_dealer_details(request, dealer_id):
 def get_dealerships(request):
     if request.method == "GET":
         context = {}
-        url = "https://us-south.functions.appdomain.cloud/api/v1/web/sbarksdale.bridgespointeinc.nc@gmail.com_djangoserver-SCB/dealership-package/get-dealership"
+        url = "https://us-south.functions.appdomain.cloud/api/v1/web/f3e16eb9-b4fa-4e9e-8897-ee1d90c7eacc/dealership-package/get-dealership"
     # Get dealers from the URL
         context["dealerships"] = get_dealers_from_cf(url)
     # Concat all dealer's short name
