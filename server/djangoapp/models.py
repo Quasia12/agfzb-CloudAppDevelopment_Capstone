@@ -17,44 +17,31 @@ class CarMake(models.Model):
 
 
 class CarModel(models.Model):
-    car_make = models.ForeignKey(CarMake, null=False, on_delete=models.CASCADE)
-    # - Many-To-One relationship to Car Make model (One Car Make has many Car Models, using ForeignKey field)
-    name = models.CharField(null=False, max_length=40, default='undefined')
-    # - Name
-    dealer_id = models.CharField(
-        null=False, max_length=40, default='undefined')
-    # - Dealer id, used to refer a dealer created in cloudant database
+    id = models.IntegerField(default=1,primary_key=True)
+    name = models.CharField(null=False, max_length=100, default='Car')
+   
     SEDAN = 'Sedan'
     SUV = 'SUV'
     WAGON = 'Wagon'
-    COUPE = 'Coupe'
-    SPORTS = 'Sports'
-    HATCHBACK = 'Hatchback'
-    CONVERTIBLE = 'Convertible'
     MINIVAN = 'Minivan'
-    TYPE_CHOICES = [
+    CAR_TYPES = [
         (SEDAN, 'Sedan'),
         (SUV, 'SUV'),
         (WAGON, 'Wagon'),
-        (COUPE, 'Coupe'),
-        (SPORTS, 'Sports'),
-        (HATCHBACK, 'Hatchback'),
-        (CONVERTIBLE, 'Convertible'),
-        (MINIVAN, 'Minivan'),
+        (MINIVAN, 'Minivan')
     ]
+
     type = models.CharField(
         null=False,
-        max_length=20,
-        choices=TYPE_CHOICES,
-        default=COUPE
+        max_length=50,
+        choices=CAR_TYPES,
+        default=SEDAN
     )
-    # - Type (CharField with a choices argument to provide limited choices such as Sedan, SUV, WAGON, etc.)
-    year = models.DateField(null=False)
-    # - Year (DateField)
-    year = models.DateTimeField('date designed')
+    make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
+    year = models.DateField(default=now)
 
     def __str__(self):
-        return self.type
+        return "Name: " + self.name
     # - __str__ method to print a car make object
 
 
