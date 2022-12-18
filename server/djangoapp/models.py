@@ -4,46 +4,12 @@ from django.core import serializers
 import uuid
 import json
 
-
 class CarMake(models.Model):
-    name = models.CharField(null=False, max_length=20, default='undefined')
-    # - Name
-    description = models.TextField(null=True)
-    # - Description
-
-    def __str__(self):
-        # - __str__ method to print a car make object
-        return self.name + ": " + self.description
-
-
-class CarModel(models.Model):
-    id = models.IntegerField(default=1,primary_key=True)
-    name = models.CharField(null=False, max_length=100, default='Car')
-   
-    SEDAN = 'Sedan'
-    SUV = 'SUV'
-    WAGON = 'Wagon'
-    MINIVAN = 'Minivan'
-    CAR_TYPES = [
-        (SEDAN, 'Sedan'),
-        (SUV, 'SUV'),
-        (WAGON, 'Wagon'),
-        (MINIVAN, 'Minivan')
-    ]
-
-    type = models.CharField(
-        null=False,
-        max_length=50,
-        choices=CAR_TYPES,
-        default=SEDAN
-    )
-    make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-    year = models.DateField(default=now)
+    name = models.CharField(null=False, max_length=100, default='Make')
+    description = models.CharField(max_length=500)
 
     def __str__(self):
         return "Name: " + self.name
-    # - __str__ method to print a car make object
-
 
 class CarDealer:
     def __init__(self, address, city, full_name, id, lat, long, st, zip, short_name):
