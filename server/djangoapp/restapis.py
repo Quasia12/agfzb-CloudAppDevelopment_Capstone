@@ -1,7 +1,11 @@
 import requests
 import json
-from requests.auth import HTTPBasicAuth
 from .models import CarDealer, DealerReview
+from requests.auth import HTTPBasicAuth
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_watson.natural_language_understanding_v1 import Features,SentimentOptions
+import time
 
 
 def get_request(url, **kwargs):
@@ -115,7 +119,7 @@ def get_dealer_reviews_from_cf(url, **kwargs):
     return results
 
 def analyze_review_sentiments(text):
-    url = "https://us-south.functions.appdomain.cloud/api/v1/web/f3e16eb9-b4fa-4e9e-8897-ee1d90c7eacc/dealership-package/get-dealership"
+    url = "https://8280e67b-1648-4459-ace4-3bf8700379bd-bluemix.cloudantnosqldb.appdomain.cloud"
     api_key = "afpdHRLyQNHacwSIKBWAFueWOFp3yFvHy0jWnbhwHp2V"
     authenticator = IAMAuthenticator(api_key)
     natural_language_understanding = NaturalLanguageUnderstandingV1(version='2021-08-01',authenticator=authenticator)
