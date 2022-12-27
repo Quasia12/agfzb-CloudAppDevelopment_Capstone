@@ -44,7 +44,7 @@ def post_request(url, payload, **kwargs):
     status_code = response.status_code
     print("With status {} ".format(status_code))
     json_data = json.loads(response.text)
-    return
+    return json_data
 
 
 def get_dealers_from_cf(url, **kwargs):
