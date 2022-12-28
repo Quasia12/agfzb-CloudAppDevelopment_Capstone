@@ -64,7 +64,7 @@
                     <th data-field="state" data-filter-control="select">State</th>
                 </tr>
             </thead>
-             <body>
+             <tbody>
                 {% for dealer in dealership_list %}
                     <tr>
                         <td>{{dealer.id}}</td>
@@ -75,7 +75,7 @@
                         <td>{{dealer.st}}</td>
                     </tr>
                     {% endfor %}
-                </body>
+                </tbody>
            </table>
            </div>
            <footer class="fixed-bottom">
@@ -85,4 +85,9 @@
            </footer>
        </div>
     </body>
+    <script>
+        $(function() {
+          $('#table').bootstrapTable()
+        })
+      </script>
 </html>
